@@ -1,0 +1,58 @@
+#unos{
+    display: none;
+}
+
+#signIn{
+    border-color: green;
+    border-width: 5px;
+}
+
+#signOut{
+    border-color: red;
+    border-width: 5px;
+    display: none;
+}
+
+.entry{
+    margin-top: 10px;
+}
+
+.kolokviji{
+    background-color: yellow;
+    border-style: solid;
+    border-width: 2px;
+    border-color: black;
+    padding: 2px;
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.ispiti{
+    background-color: tomato;
+    border-style: solid;
+    border-width: 2px;
+    border-color: black;
+    padding: 2px;
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.ostalo{
+    background-color: lightblue;
+    border-style: solid;
+    border-width: 2px;
+    border-color: black;
+    padding: 2px;
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.domaci{
+    background-color: lightgreen;
+    border-style: solid;
+    border-width: 2px;
+    border-color: black;
+    padding: 2px;
+    font-weight: bold;
+    margin-right: 5px;
+}
