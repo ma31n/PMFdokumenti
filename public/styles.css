@@ -1,3 +1,10 @@
+body{
+    /*
+    background: rgb(103,103,103);
+    background: radial-gradient(circle, rgba(103,103,103,1) 18%, rgba(0,0,0,1) 100%);
+    */
+}
+
 #unos{
     display: none;
 }
@@ -14,45 +21,19 @@
 }
 
 .entry{
-    margin-top: 10px;
+    width: 80%;
+    margin: auto;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    text-align: left;
 }
 
-.kolokviji{
-    background-color: yellow;
-    border-style: solid;
-    border-width: 2px;
-    border-color: black;
-    padding: 2px;
-    font-weight: bold;
-    margin-right: 5px;
+.entryOld{
+    text-decoration: line-through;
 }
 
-.ispiti{
-    background-color: tomato;
-    border-style: solid;
-    border-width: 2px;
-    border-color: black;
-    padding: 2px;
+.kategorija{
     font-weight: bold;
-    margin-right: 5px;
-}
-
-.ostalo{
-    background-color: lightblue;
-    border-style: solid;
-    border-width: 2px;
-    border-color: black;
-    padding: 2px;
-    font-weight: bold;
-    margin-right: 5px;
-}
-
-.domaci{
-    background-color: lightgreen;
-    border-style: solid;
-    border-width: 2px;
-    border-color: black;
-    padding: 2px;
-    font-weight: bold;
-    margin-right: 5px;
+    margin-right: 10px;
+    width: 100px;
 }

@@ -8,11 +8,19 @@ const db = getDatabase(app);
 const auth = getAuth();
 const provider = new GoogleAuthProvider();
 const reference = ref(db,"datumi");
-const opcije = {
+
+const opcijePrikaz = {
   kolokviji: "Kolokvij",
   domaci: "Domaći rad",
   ispiti: "Ispit",
   ostalo: "Ostalo"
+}
+
+const opcije = {
+  kolokviji: "alert-warning",
+  domaci: "alert-success",
+  ispiti: "alert-danger",
+  ostalo: "alert-info"
 }
 
 function sortByDate(a,b){
@@ -30,6 +38,19 @@ function sortByDate(a,b){
   }
 }
 
+function sortOld(values,entry){
+  let currentDate=new Date();
+  let entryDate=new Date(values.datum);
+  if(currentDate>=entryDate){
+    entry.classList.add("alert-light");
+    entry.classList.add("entryOld");
+    return "old"
+  }
+  else{
+    entry.classList.add(opcije[values.kat]);
+    return "new"
+  }
+}
 
 document.getElementById("dodaj").onclick = () =>{
   let datum = document.getElementById("datum").value;
@@ -55,24 +76,29 @@ document.getElementById("dodaj").onclick = () =>{
 onValue(reference, function(snapshot){
 
   let datumi = document.getElementById("datumi");
+  let datumiGotovi = document.getElementById("datumi-gotovi");
 
   if(snapshot.exists()){
 
     let data = Object.entries(snapshot.val());
 
     datumi.innerHTML="";
+    datumiGotovi.innerHTML="";
 
     data.sort(sortByDate); 
     for(var i = 0; i<data.length; i++){
 
       let id = data[i][0];
       let values = data[i][1];
+      
       let entry = document.createElement("div");
       entry.classList.add("entry");
+      entry.classList.add("alert");
+      entry.classList.add(opcije[values.kat]);
 
       let cat = document.createElement("span");
-      cat.classList.add(values.kat);
-      cat.textContent = `${opcije[values.kat]}`;
+      cat.classList.add("kategorija");
+      cat.textContent = `${opcijePrikaz[values.kat]}`.toUpperCase();
 
       let desc = document.createElement("span");
       desc.textContent = `${values.opis}: ${values.datum}`;
@@ -80,17 +106,22 @@ onValue(reference, function(snapshot){
       entry.append(cat);
       entry.append(desc);
 
+      
       entry.addEventListener("dblclick",function(){
         let deleteref = ref(db, `datumi/${id}`)
         remove(deleteref);
-
+        
       })
-      datumi.append(entry);
+
+      let result = sortOld(values,entry);
+
+      if(result == "new"){datumi.append(entry);}
+      else{datumiGotovi.append(entry);}
     }
   }
 
   else{
-    datumi.innerHTML="No dates added";
+    datumi.innerHTML="No dates available!";
   }
 })
 
@@ -126,17 +157,8 @@ document.getElementById("signOut").onclick = () =>{
 
 });
 }
-
+/*
 onAuthStateChanged(auth, (user) =>{
-  /*
-  console.log(user);
-  
-  if(typeof user=="object"){
-    document.getElementById("unos").style.display="block";
-  }
-  else{
-    document.getElementById("unos").style.display="none";
-  }
-  */ 
-})
 
+})
+*/
