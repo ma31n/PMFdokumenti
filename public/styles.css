@@ -25,7 +25,6 @@ body{
     margin: auto;
     margin-top: 5px;
     margin-bottom: 5px;
-    text-align: left;
 }
 
 .entryOld{
@@ -34,6 +33,18 @@ body{
 
 .kategorija{
     font-weight: bold;
-    margin-right: 10px;
-    width: 100px;
+}
+
+.timeLeft{
+    font-weight: bold;
+}
+
+#gotoviDatumi .accordion-button{
+    background-color: gray;
+    font-weight: bold;
+    color: white;
+}
+
+.navbar{
+    background-color: gray;
 }

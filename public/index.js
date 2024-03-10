@@ -38,9 +38,7 @@ function sortByDate(a,b){
   }
 }
 
-function sortOld(values,entry){
-  let currentDate=new Date();
-  let entryDate=new Date(values.datum);
+function sortOld(values,entry, currentDate, entryDate){
   if(currentDate>=entryDate){
     entry.classList.add("alert-light");
     entry.classList.add("entryOld");
@@ -90,22 +88,58 @@ onValue(reference, function(snapshot){
 
       let id = data[i][0];
       let values = data[i][1];
+
+      let currentDate=new Date();
+      let entryDate=new Date(values.datum);
       
       let entry = document.createElement("div");
       entry.classList.add("entry");
       entry.classList.add("alert");
+      entry.classList.add("container");
       entry.classList.add(opcije[values.kat]);
+      
 
       let cat = document.createElement("span");
       cat.classList.add("kategorija");
       cat.textContent = `${opcijePrikaz[values.kat]}`.toUpperCase();
-
+      
       let desc = document.createElement("span");
       desc.textContent = `${values.opis}: ${values.datum}`;
+      
+      let time = document.createElement("span");
+      time.classList.add("timeLeft");
+      let timeLeft = Math.floor((entryDate - currentDate)/60/60/1000);
+      time.textContent = `${timeLeft} SATI PREOSTALO`;
+      
+      let row = document.createElement("div");
+      row.classList.add("row");
+      entry.append(row);
 
-      entry.append(cat);
-      entry.append(desc);
+      let col_cat = document.createElement("div");
+      col_cat.classList.add("col-sm-2");
+      col_cat.append(cat);
 
+      let col_desc = document.createElement("div");
+      col_desc.classList.add("col-sm-7");
+      col_desc.append(desc);
+
+      let col_time = document.createElement("div");
+      col_time.classList.add("col-sm-3");
+      col_time.append(time);
+
+      row.append(col_cat);
+      row.append(col_desc);
+      row.append(col_time);
+
+      entry.append(row);
+
+      if(timeLeft>24){
+        timeLeft=Math.ceil(timeLeft/24);
+        time.textContent = `${timeLeft} DANA PREOSTALO`;
+      }
+      else if(timeLeft<0){
+        time.textContent = `GOTOVO`;
+      }
       
       entry.addEventListener("dblclick",function(){
         let deleteref = ref(db, `datumi/${id}`)
@@ -113,7 +147,7 @@ onValue(reference, function(snapshot){
         
       })
 
-      let result = sortOld(values,entry);
+      let result = sortOld(values,entry, currentDate, entryDate);
 
       if(result == "new"){datumi.append(entry);}
       else{datumiGotovi.append(entry);}
