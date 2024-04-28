@@ -57,7 +57,6 @@ document.getElementById("dodaj").onclick = () =>{
 
   if(datum!="" && opis!=""){
     let date = new Date(datum).toLocaleString();
-
     let data = {
       opis: opis,
       datum: date,
@@ -91,7 +90,6 @@ onValue(reference, function(snapshot){
 
       let currentDate=new Date();
       let entryDate=new Date(values.datum);
-      
       let entry = document.createElement("div");
       entry.classList.add("entry");
       entry.classList.add("alert");
@@ -104,7 +102,7 @@ onValue(reference, function(snapshot){
       cat.textContent = `${opcijePrikaz[values.kat]}`.toUpperCase();
       
       let desc = document.createElement("span");
-      desc.textContent = `${values.opis}: ${values.datum}`;
+      desc.textContent = `${values.opis}: ${entryDate.toLocaleString("uk-Uk")}`;
       
       let time = document.createElement("span");
       time.classList.add("timeLeft");
