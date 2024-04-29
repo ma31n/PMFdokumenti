@@ -9,10 +9,18 @@
 </head>
 <body>
 
-<nav class="navbar border-bottom border-body">
+<nav class="navbar">
   <div class="container-fluid">
     <span class="navbar-brand mb-0 h1">
       <button id="signIn" class="btn btn-dark">Sign in</button>
+    </span>
+    <span class="navbar-brand mb-0 h1">
+      <button type="button" id="dodajbotun" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#dodajDatum">
+        Add
+      </button>
+    </span>
+    <span class="navbar-brand mb-0 h1">
+      <button id="signOut" class="btn btn-dark">Sign Out</button>
     </span>
   </div>
 </nav>
@@ -20,7 +28,7 @@
 <div class="container text-center">
   <div class="row">
     <div class="col-lg-12">
-      <h1>DATUMI</h1>
+      <h1 style="color: white;">DATUMI</h1>
     </div>
   </div>
 
@@ -45,24 +53,36 @@
     </div>
   </div>
 
-  <div class="row">
-    <div id="unos" class="col-lg-12">
-        <input type="text" placeholder="Unesi opis" id="opis"/>
-        <input type="datetime-local" id="datum"/>
-        <select name="kategorije" id="kategorije">
-          <option value="kolokviji">Kolokvij</option>
-          <option value="domaci">Domaći rad</option>
-          <option value="ispiti">Ispit</option>
-          <option value="ostalo">Ostalo</option>
-        </select>
-        <button id="dodaj">Dodaj</button> 
-    </div>
+</div>
 
-    <div class="col-lg-12">
-      <button id="signOut" class="btn btn-dark">Sign Out</button>
+<div class="modal fade" id="dodajDatum" tabindex="-1" aria-labelledby="dodavanje-datuma" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="dodavanje-datuma">DODAJ DATUM</h1>
+      </div>
+      <div class="modal-body">
+        <div id="unos">
+          Opis:
+          <input type="text" placeholder="Unesi opis" id="opis"/><br>
+          Datum:
+          <input type="datetime-local" id="datum"/><br>
+          Kategorija:
+          <select name="kategorije" id="kategorije">
+            <option value="kolokviji">Kolokvij</option>
+            <option value="domaci">Domaći rad</option>
+            <option value="ispiti">Ispit</option>
+            <option value="ostalo">Ostalo</option>
+          </select><br>
+
+          <button type="button" class="btn btn-success" id="dodaj">Dodaj</button> 
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
     </div>
   </div>
-
 </div>
 
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>

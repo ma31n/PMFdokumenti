@@ -162,6 +162,7 @@ document.getElementById("signIn").onclick = () =>{
   .then((result)=>{
       const user = result.user;
       document.getElementById("unos").style.display="block";
+      document.getElementById("dodajbotun").style.display="inline";
       document.getElementById("signOut").style.display="inline";
       window.alert("Welcome",user.displayName);
   })
@@ -179,6 +180,7 @@ document.getElementById("signOut").onclick = () =>{
   .then((result)=>{
     window.alert("Signed out");
     document.getElementById("unos").style.display="none";
+    document.getElementById("dodajbotun").style.display="none";
     document.getElementById("signOut").style.display="none";
   })
   .catch((error) => {
